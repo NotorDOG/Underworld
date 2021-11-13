@@ -11,12 +11,12 @@ public class PlayerControls : MonoBehaviour
     public float jumpPower = 10;
 
     Rigidbody2D rb;
-    
+    Adrenaline adr; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        adr = GetComponentInChildren<Adrenaline>();
     }
     void FixedUpdate()
     {
@@ -39,7 +39,6 @@ public class PlayerControls : MonoBehaviour
             {
                 if (colliders[i].gameObject == gameObject || colliders[i].gameObject.name == "AdrenalineCollider")
                 {
-                   
                     continue;
                 }
                 //make each jump consistently the same speed/height
@@ -50,12 +49,6 @@ public class PlayerControls : MonoBehaviour
                 break;
             }
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Debug.Log("Collision Occurred");
-        //canJump = true;
     }
     
 }
