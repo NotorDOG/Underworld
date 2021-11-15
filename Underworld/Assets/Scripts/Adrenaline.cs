@@ -15,15 +15,10 @@ public class Adrenaline : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "BadProj" && couldAdrenaline && !(adrSlider.value == adrSlider.maxValue))
         {
-            Debug.Log("Hello");
             AddAdrenaline(adrGain);
             StartCoroutine(GainAdrenaline());
         }

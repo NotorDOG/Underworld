@@ -17,6 +17,11 @@ public class Buff : MonoBehaviour
                 collision.gameObject.GetComponentInChildren<Adrenaline>().AddAdrenaline(5);
                 Destroy(gameObject);
             }
+            if(gameObject.tag == "Health")
+            {
+                collision.gameObject.GetComponentInChildren<Slider>().value += 10;
+                Destroy(gameObject);
+            }
         }
     }
 }

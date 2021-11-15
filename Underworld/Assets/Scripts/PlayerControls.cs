@@ -20,6 +20,19 @@ public class PlayerControls : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if(Input.GetAxis("Pause") == 1)
+        {
+
+            Time.timeScale = 0.0f;
+        }
+        if(Input.GetAxis("Cancel") == 1)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+        }
         float horizontalMovement = Input.GetAxis("Horizontal");
         //rb.velocity.x = speed * horizontalMovement;//not allowed
         rb.velocity = new Vector2(speed * horizontalMovement, rb.velocity.y);
@@ -48,6 +61,15 @@ public class PlayerControls : MonoBehaviour
                 
                 break;
             }
+            
+        }
+        if (GetComponentInChildren<Slider>().value <= 0)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
         }
     }
     
