@@ -1,29 +1,63 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Projectile : MonoBehaviour
 {
     Slider adrSlide;
-    Slider healthSlide;
+
+    
     public float adrDivide = 1.5f;
     public int damage = 10;
+    public int speedPerSec = 3;
+    
+
+    public GameObject targetObject;
+    public Vector3 targetPosition;
+    public Transform targetTransform;
+    public Vector3 directionVector;
+
     void Start()
     {
-        adrSlide = Camera.main.GetComponentInChildren<Slider>();
-       
+       adrSlide = Camera.main.GetComponentInChildren<Slider>();
+        if (targetTransform == null)
+            targetTransform = FindObjectOfType<PlayerControls>().transform;
+        if (targetObject == null)
+            targetObject = FindObjectOfType<PlayerControls>().gameObject;
+        targetPosition = targetObject.transform.position;
+       directionVector =
+            targetPosition - transform.position;
+        
+        
     }
-
-    // Update is called once per frame
-
+    
+    private void FixedUpdate()
+    {
+        directionVector.Normalize();
+        transform.position += directionVector * speedPerSec * Time.deltaTime;
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
-            Debug.Log(collision.ToString());
-            Destroy(gameObject);
-            collision.gameObject.GetComponentInChildren<Slider>().value -= damage;
-            adrSlide.value /= 2f;
+            if (collision.gameObject.GetComponent<PlayerControls>().isInvincible)
+            {
+                Destroy(gameObject);
+            }else
+            {
+                collision.gameObject.GetComponent<PlayerControls>().becomeInvincible();
+                Destroy(gameObject);
+                collision.gameObject.GetComponentInChildren<Slider>().value -= damage;
+                adrSlide.value /= 2f;
+            }
         }
+        else if(collision.gameObject.name == "Platform")
+        {
+            Destroy(gameObject);
+        }
+        
     }
+    
 }
+
+

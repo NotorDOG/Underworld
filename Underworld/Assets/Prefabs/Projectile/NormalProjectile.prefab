@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 9114023298846659201}
   - component: {fileID: 1762294549}
   - component: {fileID: 1404080533}
-  m_Layer: 0
-  m_Name: Projectile
+  - component: {fileID: 924767835}
+  - component: {fileID: 924767841}
+  m_Layer: 8
+  m_Name: NormalProjectile
   m_TagString: BadProj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 9114023298846659202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.239, y: -1.6306, z: 0}
-  m_LocalScale: {x: 0.6033357, y: 0.5636107, z: 1}
+  m_LocalScale: {x: 0.31, y: 0.32, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -125,7 +127,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adrDivide: 1.5
-  damage: 50
+  damage: 25
+  speedPerSec: 4
+  targetObject: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  directionVector: {x: 0, y: 0, z: 0}
 --- !u!61 &1404080533
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,3 +159,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &924767835
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114023298846659202}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &924767841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114023298846659202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b05cd33da045f48a8d06eeafb5b17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTimer: 5

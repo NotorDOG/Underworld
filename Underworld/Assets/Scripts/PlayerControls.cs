@@ -9,7 +9,8 @@ public class PlayerControls : MonoBehaviour
 {
     public float speed = 3;
     public float jumpPower = 10;
-
+    public bool isInvincible = false;
+    public float timeInvincible = 3.0f;
     Rigidbody2D rb;
     Adrenaline adr; 
 
@@ -20,10 +21,10 @@ public class PlayerControls : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(Input.GetAxis("Pause") == 1)
-        {
 
-            Time.timeScale = 0.0f;
+        if (Input.GetAxis("Pause") == 1)
+        {
+        Time.timeScale = 0.0f;   
         }
         if(Input.GetAxis("Cancel") == 1)
         {
@@ -72,5 +73,15 @@ public class PlayerControls : MonoBehaviour
 #endif
         }
     }
-    
+
+    public void becomeInvincible()
+    {
+        StartCoroutine(RevertHittable());
+    }
+    IEnumerator RevertHittable()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(timeInvincible);
+        isInvincible = false;
+    }
 }
