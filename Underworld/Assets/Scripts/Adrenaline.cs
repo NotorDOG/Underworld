@@ -38,6 +38,6 @@ public class Adrenaline : MonoBehaviour
 
     public void setAdrenaline(int value)
     {
-        adrSlider.value = value;
+        adrSlider.value += value;
     }
 }

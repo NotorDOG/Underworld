@@ -5,12 +5,10 @@ public class Projectile : MonoBehaviour
 {
     Slider adrSlide;
 
-    
     public float adrDivide = 1.5f;
     public int damage = 10;
     public int speedPerSec = 3;
     
-
     public GameObject targetObject;
     public Vector3 targetPosition;
     public Transform targetTransform;
@@ -26,8 +24,6 @@ public class Projectile : MonoBehaviour
         targetPosition = targetObject.transform.position;
        directionVector =
             targetPosition - transform.position;
-        
-        
     }
     
     private void FixedUpdate()
@@ -42,17 +38,36 @@ public class Projectile : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<PlayerControls>().isInvincible)
             {
-                Destroy(gameObject);
+                if (gameObject.tag == "Health")
+                {
+                    collision.gameObject.GetComponentInChildren<Slider>().value += damage;
+                    Destroy(gameObject);
+                }else
+                {
+                    adrSlide.value /= 2f;
+                    Destroy(gameObject);
+                }
             }else
             {
-                collision.gameObject.GetComponent<PlayerControls>().becomeInvincible();
-                Destroy(gameObject);
-                collision.gameObject.GetComponentInChildren<Slider>().value -= damage;
-                adrSlide.value /= 2f;
+                if (gameObject.tag == "Health")
+                {
+                    Destroy(gameObject);
+                    collision.gameObject.GetComponentInChildren<Slider>().value += damage;
+                }else
+                {
+                    collision.gameObject.GetComponent<PlayerControls>().becomeInvincible();
+                    Destroy(gameObject);
+                    collision.gameObject.GetComponentInChildren<Slider>().value -= damage;
+                    adrSlide.value /= 2f;
+                }
             }
         }
         else if(collision.gameObject.name == "Platform")
         {
+            Destroy(gameObject);
+        }else if(collision.gameObject.tag == "PlayProj")
+        {
+            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
         

@@ -57,7 +57,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9114023298846659202, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
       propertyPath: m_TagString
-      value: PlayerProj
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114023298846659203, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114023298846659203, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114023298846659203, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: m_Color.r
+      value: 0.28109956
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}

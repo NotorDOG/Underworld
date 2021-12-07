@@ -8,7 +8,7 @@ TagManager:
   - AdrBoost
   - Players
   - Health
-  - PlayerProj
+  - PlayProj
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - Platform
   - Adrenaline
   - Projectile
-  - 
+  - PlayProj
   - 
   - 
   - 

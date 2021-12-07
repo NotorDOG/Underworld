@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
+    public float maxHealth = 100f;
+    private float currentHealth;
     public float timeSpawn = 3.0f;
     public int numberSpawn = 4;
-    public GameObject spawnable;
+    public float bufferTimeSpawn = .2f;
+    public List<GameObject> spawnable;
     // Start is called before the first frame update
-    private void Start()
-    {
-        StartCoroutine(SpawnEnemy());
-    }
+   
     IEnumerator SpawnEnemy()
     {
         while (true)
         {
-            if (!GetComponent<Renderer>().isVisible)
-                continue;
             yield return new WaitForSeconds(timeSpawn);
             for (int i = 0; i <= numberSpawn; i++)
             {
-                yield return new WaitForSeconds(.1f);
-                Instantiate(spawnable, transform.position, transform.rotation); }
+            yield return new WaitForSeconds(bufferTimeSpawn);
+            Instantiate(spawnable[0], transform.position, transform.rotation); 
+            }
+            yield return new WaitForSeconds(bufferTimeSpawn + 0.2f);
+            Instantiate(spawnable[1], transform.position, transform.rotation);
         }
+    }
+    private void OnBecameInvisible()
+    {
+        
+        StopAllCoroutines();
+        
+    }
+    private void OnBecameVisible()
+    {
+        StartCoroutine(SpawnEnemy());
     }
 }

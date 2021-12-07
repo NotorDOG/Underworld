@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Threading;
-
 
 public class PlayerControls : MonoBehaviour
 {
@@ -11,9 +8,11 @@ public class PlayerControls : MonoBehaviour
     public float jumpPower = 10;
     public bool isInvincible = false;
     public float timeInvincible = 3.0f;
+    public GameObject bullet; 
     Rigidbody2D rb;
-    Adrenaline adr; 
-
+    public int ammunitionAmount = 5;
+    public bool canShoot = true;
+    Adrenaline adr;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +33,10 @@ public class PlayerControls : MonoBehaviour
         Application.Quit();
 #endif
         }
+        if(canShoot && Input.GetAxis("Fire1") == 1 && Camera.main.GetComponentInChildren<Slider>().value > ammunitionAmount)
+        {
+            StartCoroutine(ShootandReload());
+        }
         float horizontalMovement = Input.GetAxis("Horizontal");
         //rb.velocity.x = speed * horizontalMovement;//not allowed
         rb.velocity = new Vector2(speed * horizontalMovement, rb.velocity.y);
@@ -46,12 +49,11 @@ public class PlayerControls : MonoBehaviour
             
             //Check if the feet are colliding with something right now
             Vector3 feetPosition = transform.GetChild(0).position;
-            
             Collider2D[] colliders = Physics2D.OverlapCircleAll(feetPosition, .25f);
             
             for (int i = 0; i < colliders.Length; ++i)
             {
-                if (colliders[i].gameObject == gameObject || colliders[i].gameObject.name == "AdrenalineCollider")
+                if (colliders[i].gameObject == gameObject || colliders[i].gameObject.name == "AdrenalineCollider" || colliders[i].gameObject.tag == "BadProj" || colliders[i].gameObject.tag == "Health")
                 {
                     continue;
                 }
@@ -73,7 +75,6 @@ public class PlayerControls : MonoBehaviour
 #endif
         }
     }
-
     public void becomeInvincible()
     {
         StartCoroutine(RevertHittable());
@@ -83,5 +84,13 @@ public class PlayerControls : MonoBehaviour
         isInvincible = true;
         yield return new WaitForSeconds(timeInvincible);
         isInvincible = false;
+    }
+    IEnumerator ShootandReload()
+    {
+        canShoot = false;
+        adr.setAdrenaline(-10);
+        Instantiate(bullet, transform.GetChild(4).position, transform.rotation);
+        yield return new WaitForSeconds(.3f);
+        canShoot = true;
     }
 }
