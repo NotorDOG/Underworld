@@ -9,6 +9,8 @@ TagManager:
   - Players
   - Health
   - PlayProj
+  - Platform
+  - Spawner
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Adrenaline
   - Projectile
   - PlayProj
-  - 
+  - Spawner
   - 
   - 
   - 

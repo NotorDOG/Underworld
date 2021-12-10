@@ -5,17 +5,26 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public float maxHealth = 100f;
-    private float currentHealth;
-    public float timeSpawn = 3.0f;
-    public int numberSpawn = 4;
-    public float bufferTimeSpawn = .2f;
+    public float currentHealth;
+
+    private float timeSpawn = 3.0f;
+    private int numberSpawn = 4;
+    private float bufferTimeSpawn = 1f;
     public List<GameObject> spawnable;
     // Start is called before the first frame update
    
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
+    
+
     IEnumerator SpawnEnemy()
     {
+        
         while (true)
         {
+            
             yield return new WaitForSeconds(timeSpawn);
             for (int i = 0; i <= numberSpawn; i++)
             {
@@ -36,4 +45,8 @@ public class Spawner : MonoBehaviour
     {
         StartCoroutine(SpawnEnemy());
     }
-}
+    
+        
+    }
+   
+

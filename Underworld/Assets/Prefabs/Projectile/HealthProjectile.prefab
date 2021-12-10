@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8352532663601762215, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352532663601762215, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352532663601762215, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.038092494
+      objectReference: {fileID: 0}
     - target: {fileID: 9114023298846659200, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +65,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9114023298846659202, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
       propertyPath: m_Name
-      value: PlayerProj
+      value: HealthProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114023298846659202, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9114023298846659202, guid: 18d8789cde0e1614aabacf836c1f7296, type: 3}
       propertyPath: m_TagString

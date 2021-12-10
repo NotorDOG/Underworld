@@ -14,7 +14,7 @@ public class Buff : MonoBehaviour
         {
             if(gameObject.tag == "AdrBoost")
             {
-                collision.gameObject.GetComponentInChildren<Adrenaline>().AddAdrenaline(5);
+                collision.gameObject.GetComponentInChildren<Adrenaline>().AddAdrenaline(25);
                 Destroy(gameObject);
             }
             if(gameObject.tag == "Health")

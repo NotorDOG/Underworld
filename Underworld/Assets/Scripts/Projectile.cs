@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
-        else if(collision.gameObject.name == "Platform")
+        else if(collision.gameObject.tag == "Platform")
         {
             Destroy(gameObject);
         }else if(collision.gameObject.tag == "PlayProj")

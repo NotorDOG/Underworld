@@ -1,22 +1,40 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerControls : MonoBehaviour
 {
     public float speed = 3;
     public float jumpPower = 10;
     public bool isInvincible = false;
     public float timeInvincible = 3.0f;
-    public GameObject bullet; 
-    Rigidbody2D rb;
+    public float reloadTime = .5f;
+    
     public int ammunitionAmount = 5;
     public bool canShoot = true;
+
+    public GameObject bullet;
+    Rigidbody2D rb;
     Adrenaline adr;
+    Animator anim;
+    AudioSource sound;
+
     void Start()
     {
+        PlayerPrefs.SetString("Level", SceneManager.GetActiveScene().name);
         rb = GetComponent<Rigidbody2D>();
         adr = GetComponentInChildren<Adrenaline>();
+        anim = GetComponent<Animator>();
+        sound = GetComponent<AudioSource>();
+
+        if (PlayerPrefs.HasKey("Health") && PlayerPrefs.HasKey("Adrenaline"))
+        {
+            Camera.main.GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("Adrenaline");
+            GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("Health");
+        }
+        
+            
+        
     }
     void FixedUpdate()
     {
@@ -27,6 +45,8 @@ public class PlayerControls : MonoBehaviour
         }
         if(Input.GetAxis("Cancel") == 1)
         {
+            PlayerPrefs.SetFloat("Adrenaline", Camera.main.GetComponentInChildren<Slider>().value);
+            PlayerPrefs.SetFloat("Health", GetComponentInChildren<Slider>().value);
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -66,6 +86,12 @@ public class PlayerControls : MonoBehaviour
             }
             
         }
+
+        if (rb.velocity.magnitude > .01f)
+            anim.SetBool("isMoving", true);
+        else
+            anim.SetBool("isMoving", false);
+
         if (GetComponentInChildren<Slider>().value <= 0)
         {
 #if UNITY_EDITOR
@@ -89,8 +115,9 @@ public class PlayerControls : MonoBehaviour
     {
         canShoot = false;
         adr.setAdrenaline(-10);
+        sound.Play();
         Instantiate(bullet, transform.GetChild(4).position, transform.rotation);
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(reloadTime);
         canShoot = true;
     }
 }
